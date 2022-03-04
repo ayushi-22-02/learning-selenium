@@ -63,7 +63,7 @@ public class SeleniumWebsiteTest {
         String title = driver.getTitle();
         assertEquals("Blog Posts - 2017 | Selenium", title);
 
- 
+
     }
 
 }
