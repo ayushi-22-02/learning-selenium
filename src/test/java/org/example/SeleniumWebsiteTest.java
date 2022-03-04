@@ -1,6 +1,9 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,16 +13,32 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.Assert.assertEquals;
 
 public class SeleniumWebsiteTest {
-    @Test
-    public void test_selenium_dot_dev_blog() {
+    private WebDriver driver;
+    @BeforeClass
+    public static void init()
+    {
         WebDriverManager.chromedriver().setup();
+    }
+    @Before
+    public void setup()
+    {
 
-        WebDriver driver = new ChromeDriver();
+       driver = new ChromeDriver();
 
         driver.get("https://selenium.dev");
 
         WebElement blog = driver.findElement(By.linkText("Blog"));
         blog.click();
+    }
+    @After
+    public void closeConnection()
+    {
+        driver.quit();
+    }
+    @Test
+    public void test_selenium_dot_dev_blog_2016_page() {
+
+
 
         WebElement link2016 = driver.findElement(By.id("m-blog2016"));
         link2016.click();
@@ -30,6 +49,21 @@ public class SeleniumWebsiteTest {
         String title = driver.getTitle();
         assertEquals("Blog Posts - 2016 | Selenium", title);
 
-        driver.quit();
+
     }
+    @Test
+    public void test_selenium_dot_dev_blog_2017_page() {
+
+
+        WebElement link2017 = driver.findElement(By.id("m-blog2017"));
+        link2017.click();
+
+
+
+        String title = driver.getTitle();
+        assertEquals("Blog Posts - 2017 | Selenium", title);
+
+ 
+    }
+
 }
